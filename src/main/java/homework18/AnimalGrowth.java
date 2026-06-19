@@ -9,22 +9,22 @@ public class AnimalGrowth {
         int monkeysCount = 5;     // 5 мартышек
         int elephantsCount = 2;   // 2 слонёнка
 
-        double parrotHeightCm = boaLengthCm / parrotsCount;
-        double monkeyHeightCm = boaLengthCm / monkeysCount;
-        double elephantHeightCm = boaLengthCm / elephantsCount;
+        double parrotLengthCm = boaLengthCm / parrotsCount;
+        double monkeyLengthCm = boaLengthCm / monkeysCount;
+        double elephantLengthCm = boaLengthCm / elephantsCount;
 
         double boaLengthM = boaLengthCm / 100;
-        double parrotHeightM = parrotHeightCm / 100;
-        double monkeyHeightM = monkeyHeightCm / 100;
-        double elephantHeightM = elephantHeightCm / 100;
+        double parrotLengthM = parrotLengthCm / 100;
+        double monkeyLengthM = monkeyLengthCm / 100;
+        double elephantLengthM = elephantLengthCm / 100;
 
-        double totalHeight = boaLengthM + parrotHeightM + monkeyHeightM + elephantHeightM;
+        double totalLength = boaLengthM + parrotLengthM + monkeyLengthM + elephantLengthM;
 
         // вывод результатов
         System.out.printf("Рост удава: %.2f м%n", boaLengthM);
-        System.out.printf("Рост попугая: %.2f м%n", parrotHeightM);
-        System.out.printf("Рост мартышки: %.2f м%n", monkeyHeightM);
-        System.out.printf("Рост слонёнка: %.2f м%n", elephantHeightM);
-        System.out.printf("Суммарный рост всех персонажей: %.2f м%n", totalHeight);
+        System.out.printf("Рост попугая: %.2f м%n", parrotLengthM);
+        System.out.printf("Рост мартышки: %.2f м%n", monkeyLengthM);
+        System.out.printf("Рост слонёнка: %.2f м%n", elephantLengthM);
+        System.out.printf("Суммарный рост всех персонажей: %.2f м%n", totalLength);
     }
 }

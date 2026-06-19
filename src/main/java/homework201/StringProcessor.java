@@ -3,7 +3,7 @@ package homework201;
 import java.util.Scanner;
 
 public class StringProcessor {
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         try {
@@ -14,6 +14,8 @@ public class StringProcessor {
                 throw new IllegalArgumentException("Ошибка: строка должна быть ненулевой и неединичной длины");
             }
 
+            validateAllowedCharacters(input);
+
             System.out.print("Введите символ для замены (кроме пробела): ");
             String symbolInput = scanner.nextLine();
 
@@ -21,13 +23,13 @@ public class StringProcessor {
                 throw new IllegalArgumentException("Ошибка: символ не может быть пустым");
             }
 
-            char searchChar = symbolInput.charAt(0);
+            String symbolForReplace = symbolInput;
 
-            if (searchChar == ' ') {
+            if (symbolForReplace.contains(" ")) {
                 throw new IllegalArgumentException("Ошибка: пробел нельзя использовать для замены");
             }
 
-            processString(input, searchChar);
+            processString(input, symbolForReplace);
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -36,48 +38,33 @@ public class StringProcessor {
         }
     }
 
-    private static void processString(String originalString, char searchChar) {
-        try {
-            String normalizedString = normalizeSpaces(originalString);
+    private static void processString(String originalString, String symbolForReplace) {
+        String normalizedString = deleteExtraSpaces(originalString);
 
-            String resultString = replaceCharWithSpaces(normalizedString, searchChar);
+        String resultString = replaceSymbolWithSpaces(normalizedString, symbolForReplace);
 
-            resultString = normalizeSpaces(resultString);
+        resultString = deleteExtraSpaces(resultString);
 
-            System.out.println("\nИсходная строка: " + originalString);
-            System.out.println("Результат: " + resultString);
+        System.out.println("\nИсходная строка: " + originalString);
+        System.out.println("Результат: " + resultString);
 
-            if (resultString.equals(normalizedString)) {
-                System.out.println("Сообщение: Строка не изменилась после преобразований");
-            }
-
-        } catch (NullPointerException e) {
-            System.out.println("Ошибка: строка не может быть пустой");
+        if (resultString.equals(normalizedString)) {
+            System.out.println("Сообщение: Строка не изменилась после преобразований");
         }
     }
 
-    private static String normalizeSpaces(String str) {
-        if (str == null) {
-            throw new NullPointerException("Строка не может быть пустой");
+    private static void validateAllowedCharacters(String str) {
+        if (!str.matches("[a-zA-Zа-яА-ЯёЁ.,!?:;\\s]+")) {
+            throw new IllegalArgumentException("Ошибка: строка содержит недопустимые символы");
         }
+    }
+
+    private static String deleteExtraSpaces(String str) {
         String trimmed = str.trim();
-        return trimmed.isEmpty() ? "" : trimmed.replaceAll("\\s+", " ");
+        return trimmed.isEmpty() ? trimmed : trimmed.replaceAll(" +", " ");
     }
 
-    private static String replaceCharWithSpaces(String str, char target) {
-        if (str == null) {
-            throw new NullPointerException("Строка не может быть пустой");
-        }
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            char currentChar = str.charAt(i);
-            if (currentChar == target) {
-                result.append(' ');
-            } else {
-                result.append(currentChar);
-            }
-        }
-        return result.toString();
+    private static String replaceSymbolWithSpaces(String str, String target) {
+        return str.replace(target, " ");
     }
 }

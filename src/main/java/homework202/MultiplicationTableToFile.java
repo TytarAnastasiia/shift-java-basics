@@ -1,5 +1,6 @@
 package homework202;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class MultiplicationTableToFile {
 
             boolean isReverse = start > end;
 
-            java.util.ArrayList<Integer> values = new java.util.ArrayList<>();
+            ArrayList<Integer> values = new ArrayList<>();
             if (isReverse) {
                 for (int i = start; i >= end; i += step) {
                     values.add(i);
@@ -40,32 +41,28 @@ public class MultiplicationTableToFile {
                 }
             }
 
-            java.util.ArrayList<String> lines = new java.util.ArrayList<>();
-
-            StringBuilder headerRow = new StringBuilder("     ");
+            StringBuilder result = new StringBuilder();
+            result.append("     ");
             for (int colVal : values) {
-                headerRow.append(String.format("%6d", colVal));
+                result.append(String.format("%6d", colVal));
             }
-            lines.add(headerRow.toString());
+            result.append(System.lineSeparator());
 
-            StringBuilder separatorRow = new StringBuilder("     ");
+            result.append("     ");
             for (int i = 0; i < values.size(); i++) {
-                separatorRow.append("------");
+                result.append("------");
             }
-            lines.add(separatorRow.toString());
+            result.append(System.lineSeparator());
 
             for (int rowVal : values) {
-                StringBuilder row = new StringBuilder(String.format("%4d |", rowVal));
+                result.append(String.format("%4d |", rowVal));
                 for (int colVal : values) {
-                    row.append(String.format("%6d", rowVal * colVal));
+                    result.append(String.format("%6d", rowVal * colVal));
                 }
-                lines.add(row.toString());
+                result.append(System.lineSeparator());
             }
 
-            for (String line : lines) {
-                fos.write(line.getBytes());
-                fos.write(System.lineSeparator().getBytes());
-            }
+            fos.write(result.toString().getBytes());
 
             System.out.println("Таблица умножения сохранена в файл multiplication_table.txt");
 

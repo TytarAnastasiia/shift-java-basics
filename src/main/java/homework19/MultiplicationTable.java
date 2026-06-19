@@ -1,5 +1,6 @@
 package homework19;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MultiplicationTable {
@@ -25,7 +26,7 @@ public class MultiplicationTable {
 
         boolean isReverse = start > end;
 
-        java.util.ArrayList<Integer> values = new java.util.ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
         if (isReverse) {
             for (int i = start; i >= end; i += step) {
                 values.add(i);
@@ -36,13 +37,13 @@ public class MultiplicationTable {
             }
         }
 
-        System.out.print("     ");
+        System.out.print("      ");
         for (int colVal : values) {
             System.out.printf("%6d", colVal);
         }
         System.out.println();
 
-        System.out.print("     ");
+        System.out.print("      ");
         for (int i = 0; i < values.size(); i++) {
             System.out.print("------");
         }
